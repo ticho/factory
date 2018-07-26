@@ -10,15 +10,11 @@ end
   Assembly.create(part_number: Faker::Ancient.hero)
 end
 
-# these two last commands fill up the assemblies_parts table
-# give each part a random assembly
+# the assembly - part relation should be mutual
 Part.all.each do |part|
-  part.assemblies.push(Assembly.all.sample)
+  assembly = Assembly.all.sample
+  part.assemblies.push(assembly)
+  assembly.parts.push(part)
   part.save
-end
-
-# give each assembly a random part
-Assembly.all.each do |assembly|
-  assembly.parts.push(Part.all.sample)
   assembly.save
 end

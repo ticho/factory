@@ -37,6 +37,21 @@ $ rails db:migrate
 $ rails db:seed
 ```
 
+## Test
+To make sure that the relation between part - assembly goes both ways
+
+```ruby
+Part.all.each do |part|
+  part.assemblies.each do |assembly|
+    if !assembly.parts.include? part
+      puts "Error"
+    else
+      puts "OK"
+    end
+  end
+end
+```
+
 ## Gems
 We use :
 - `faker` to populate the database with phony names, emails etc..
